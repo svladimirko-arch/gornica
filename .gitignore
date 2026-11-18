@@ -1,4 +1,5 @@
 ffmpeg2pass-*.log*
 *.mp4
 GORNICA_v9_cover.jpg
+__pycache__/
 

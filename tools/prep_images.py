@@ -25,7 +25,6 @@ N = 0.16    # убрать подпись бренда + «2GIS»
 JOBS = {
     # --- ключевые кадры
     "hero":      ("vk03.jpg", 0, 0, None),
-    "story":     ("g07.jpg", G, 0, None),
     "wedding":   ("vk02.jpg", 0, 0, None),
     "evening":   ("hero-3.jpg", 0.03, 0, None),
     "evening2":  ("g43.jpg", G, 0, None),
@@ -85,14 +84,6 @@ for key, (f, cb, cr, box) in JOBS.items():
         t = im.resize((round(w*k), round(h*k)), Image.LANCZOS) if k < 1 else im
         t.save(os.path.join(OUT, f"{key}-{suf}.webp"), "WEBP", quality=80 if suf == "l" else 76, method=6)
     meta[key] = [w, h]
-
-# готовая фотография салона/вешалок (из прежней сборки)
-sd = os.path.join(HERE, "g56-story-detail.webp")
-if os.path.exists(sd):
-    im = Image.open(sd).convert("RGB"); w, h = im.size
-    im.save(os.path.join(OUT, "detail-l.webp"), "WEBP", quality=80, method=6)
-    im.resize((760, round(h*760/w)), Image.LANCZOS).save(os.path.join(OUT, "detail-s.webp"), "WEBP", quality=76, method=6)
-    meta["detail"] = [w, h]
 
 json.dump(meta, open(os.path.join(HERE, "sizes.json"), "w"), ensure_ascii=False)
 print(json.dumps(meta))
